@@ -1,12 +1,12 @@
 from django.contrib import admin
 from .models import Product, Customer, Cart, Payment, OrderPlaced, Wishlist
-from django.urls import reverse
+# from django.urls import reverse, format_html
 from django.contrib.auth.models import Group
 # Register your models here.
 
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ['id','title','discounted_price','category','product_image']
+    list_display = ['id','title','category','size','color','product_image']
 
 @admin.register(Customer)
 class CustomerModelAdmin(admin.ModelAdmin):
@@ -15,9 +15,9 @@ class CustomerModelAdmin(admin.ModelAdmin):
 @admin.register(Cart)
 class CartModelAdmin(admin.ModelAdmin):
     list_display = ['id','user','product', 'quantity']
-    def product(self,obj):
-        link = reverse("admin:app_product_change", args=[obj.product.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    # def product(self,obj):
+    #     link = reverse("admin:app_product_change", args=[obj.product.pk])
+    #     return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
 @admin.register(Payment)
 class PaymentModelAdmin(admin.ModelAdmin):
@@ -25,24 +25,24 @@ class PaymentModelAdmin(admin.ModelAdmin):
 
 @admin.register(OrderPlaced)
 class OrderPlacedModelAdmin(admin.ModelAdmin):
-    list_display = ['id','user','customer', 'products', 'quantity','ordered_date','status']
-    def customers(self,obj):
-        link = reverse("admin:app_customer_change", args=[obj.product.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    list_display = ['id','user','customer', 'product', 'quantity','ordered_date','status']
+    # def customers(self,obj):
+    #     link = reverse("admin:app_customer_change", args=[obj.product.pk])
+    #     return format_html('<a href="{}">{}</a>', link, obj.product.title)
     
-    def products(self,obj):
-        link = reverse("admin:app_product_change", args=[obj.product.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    # def products(self,obj):
+    #     link = reverse("admin:app_product_change", args=[obj.product.pk])
+    #     return format_html('<a href="{}">{}</a>', link, obj.product.title)
     
-    def payments(self,obj):
-        link = reverse("admin:app_payment_change", args=[obj.product.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    # def payments(self,obj):
+    #     link = reverse("admin:app_payment_change", args=[obj.product.pk])
+    #     return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
 @admin.register(Wishlist)
 class WishlistModelAdmin(admin.ModelAdmin):
     list_display = ['id','user','product']  
-    def product(self,obj):
-        link = reverse("admin:app_product_change", args=[obj.product.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    # def product(self,obj):
+    #     link = reverse("admin:app_product_change", args=[obj.product.pk])
+    #     return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
 admin.site.unregister(Group)
