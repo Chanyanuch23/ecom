@@ -31,10 +31,10 @@ COLOR = (
 class Product(models.Model):
     title = models.CharField(max_length=100)
     selling_price = models.FloatField() 
-    discription = models.TextField()
+    description = models.TextField()
     category = models.CharField(choices=CATEGORY_CHOICES,max_length=2)
-    size = models.CharField(choices=CATEGORY_SIZE ,max_length=2)
-    color = models.CharField(choices=COLOR,max_length=10)
+    size = models.CharField(choices=CATEGORY_SIZE ,max_length=2,default=None)
+    color = models.CharField(choices=COLOR,max_length=10,default='white')
     product_image = models.ImageField(upload_to='images')
     def __str__(self):
         return self.title
@@ -83,4 +83,3 @@ class OrderPlaced(models.Model):
 class Wishlist(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    
